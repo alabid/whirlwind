@@ -60,7 +60,7 @@ class Filters():
             
         # if it's a number
         if isintance(val, float) or isinstance(val, int):
-            num_type = 'float' if isinstance(val, float) else 'int')
+            num_type = 'float' if isinstance(val, float) else 'int'
             return Filters.add_commas(val, num_type)
         
         # else default to returning the string
