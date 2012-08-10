@@ -47,10 +47,23 @@ class Filters():
     def str(val):
         if not val:
             return ''
-        #TODO: sensibly handle:
-        # dicts => json 
-        # dates => pretty 
-        # numbers => add commas
+        
+        # if it's a dict
+        if isinstance(val, dict):
+            return Filters.to_json(val)
+        
+        # check it's a number string. If so, preprocess into a number
+        if re.match(r'^[\d]+$', val):
+            val = int(val)
+        elif re.match(r'^[\d]+\.?([\d]+)?$', val):    
+            val = float(val)
+            
+        # if it's a number
+        if isintance(val, float) or isinstance(val, int):
+            num_type = 'float' if isinstance(val, float) else 'int')
+            return Filters.add_commas(val, num_type)
+        
+        # else default to returning the string
         return str(val)
         
     
