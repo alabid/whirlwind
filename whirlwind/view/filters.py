@@ -211,13 +211,13 @@ class Pluralizer():
                   ('$', '$', 's')
                   )
 
-    def regex_rules(rules=rule_tuple):
+    def regex_rules(self, rules=rule_tuple):
         for line in rules:
             pattern, search, replace = line
             yield lambda word: re.search(pattern, word) and re.sub(search, replace, word)
  
-    def plural(noun):
-        for rule in regex_rules():
+    def plural(self, noun):
+        for rule in self.regex_rules():
             result = rule(noun)
             if result:
                 return result
